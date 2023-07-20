@@ -31,7 +31,7 @@ import cl.awakelab.ejercicio16m5.databinding.ActivityMainBinding
 * */
 * */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PaisCallback {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         val adapter = Adapter()
+        adapter.setPaisCallback(this)
         adapter.setData(PaisesLatam.paises)
-        binding.RecyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
+
+    }
+
+    override fun showCountry(s: String) {
+        binding.textView.text = s
     }
 }
